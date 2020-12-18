@@ -31,13 +31,14 @@ def get_metadata(url):
 		if file_data['format'] == 'VBR MP3':
 			filename = file_data['name']
 			title = file_data['title']
+			title = title.replace(' ', '_')
 			track = file_data['track']
 			new_metadata[filename] = {
 				'title'             : title,
 				'download_filename' : filename
 			}
 			try:
-				new_metadata[filename]['local_filename'] = "{0}. {1}".format(track, title)
+				new_metadata[filename]['local_filename'] = "{0}_{1}".format(track, title)
 			except KeyError:
 				new_metadata[filename]['local_filename'] = title
 			new_metadata[filename]['local_filename'] = sanitize(new_metadata[filename]['local_filename'])
